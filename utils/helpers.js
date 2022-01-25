@@ -1,11 +1,23 @@
-const router = require('express').Router();
-
-const apiRoutes = require('./api/');
-const homeRoutes = require('./home-routes.js');
-const dashboardRoutes = require('./dashboard-routes.js');
-
-router.use('/', homeRoutes);
-router.use('/dashboard', dashboardRoutes);
-router.use('/api', apiRoutes);
-
-module.exports = router;
+module.exports = {
+    format_date: date => {
+      return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(
+        date
+      ).getFullYear()}`;
+    },
+    format_url: url => {
+      return url
+        .replace('http://', '')
+        .replace('https://', '')
+        .replace('www.', '')
+        .split('/')[0]
+        .split('?')[0];
+    },
+    format_plural: (word, amount) => {
+      if (amount !== 1) {
+        return `${word}s`;
+      }
+  
+      return word;
+    }
+  };
+  
